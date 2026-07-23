@@ -31,5 +31,5 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            oddwarrior/panasonic-ac-frontend:latest
             oddwarrior/panasonic-ac-frontend:${{ github.sha }}
+            oddwarrior/panasonic-ac-frontend:pr-${{ github.event.pull_request.number }}
