@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+---
+## [0.3.0] - 2026-07-24
+
 ### Added
-- Initial creation of the changelog.
-- CI/CD workflow for Docker image builds.
 - Dockerfile and docker-compose configuration for the frontend.
-- Test on pr workflow
+- CI/CD workflow on PR for Docker image builds.
+- Docker image tags on PR merge.
 
 ### Changed
 - None yet.
