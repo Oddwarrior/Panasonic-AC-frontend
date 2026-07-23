@@ -1,3 +1,10 @@
+# [0.4.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v0.3.0...v0.4.0) (2026-07-23)
+
+
+### Features
+
+* add semantic-release workflow and configuration for automated versioning ([acc1e55](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/acc1e55a5ed4863c8f11e78ce249b56fc6667078))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
