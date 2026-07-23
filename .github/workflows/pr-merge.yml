@@ -24,12 +24,25 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
+      - name: Prepare Docker Tags
+        id: prep
+        run: |
+          # Base tags for all PR merges
+          TAGS="oddwarrior/panasonic-ac-frontend:${{ github.sha }},oddwarrior/panasonic-ac-frontend:pr-${{ github.event.pull_request.number }}"
+          
+          # If this was a Release Please PR, add the production release tags
+          if [[ "${{ github.event.pull_request.head.ref }}" == release-please--* ]]; then
+            VERSION=$(node -p "require('./package.json').version")
+            echo "Release Please PR detected. Found version: $VERSION"
+            TAGS="$TAGS,oddwarrior/panasonic-ac-frontend:v$VERSION,oddwarrior/panasonic-ac-frontend:latest"
+          fi
+          
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: |
-            oddwarrior/panasonic-ac-frontend:${{ github.sha }}
-            oddwarrior/panasonic-ac-frontend:pr-${{ github.event.pull_request.number }}
+          tags: ${{ steps.prep.outputs.tags }}
