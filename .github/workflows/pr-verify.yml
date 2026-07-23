@@ -1,0 +1,22 @@
+name: Verify Build on PR
+
+"on":
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  verify-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: oddwarrior/panasonic-ac-frontend:test
