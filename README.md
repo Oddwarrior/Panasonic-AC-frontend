@@ -18,3 +18,5 @@ If you are developing a production application, we recommend using TypeScript wi
 <!-- test trigger -->
 
 <!-- test trigger 2 -->
+
+- Added new release please features
