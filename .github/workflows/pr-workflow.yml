@@ -1,6 +1,6 @@
 name: Docker Build Workflow
 
-on:
+"on":
   pull_request:
     types: [opened, synchronize, reopened, closed]
 
