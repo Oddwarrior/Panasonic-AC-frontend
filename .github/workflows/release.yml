@@ -9,6 +9,11 @@ jobs:
   tag-release:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # We need the parent commit!
+          
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
@@ -20,7 +25,13 @@ jobs:
           
       - name: Retag existing image
         run: |
+          # Get the SHA of the commit BEFORE the Semantic Release commit
+          PARENT_SHA=$(git rev-parse HEAD^)
+          
+          echo "Semantic Release commit: ${{ github.sha }}"
+          echo "Parent (PR Merge) commit: $PARENT_SHA"
+          
           docker buildx imagetools create \
-            oddwarrior/panasonic-ac-frontend:${{ github.sha }} \
+            oddwarrior/panasonic-ac-frontend:${PARENT_SHA} \
             --tag oddwarrior/panasonic-ac-frontend:${{ github.ref_name }} \
             --tag oddwarrior/panasonic-ac-frontend:latest
