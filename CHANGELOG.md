@@ -1,10 +1,3 @@
-# [0.4.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v0.3.0...v0.4.0) (2026-07-23)
-
-
-### Features
-
-* add semantic-release workflow and configuration for automated versioning ([acc1e55](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/acc1e55a5ed4863c8f11e78ce249b56fc6667078))
-
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -26,12 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * another quick fix for release ([ebf5677](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/ebf567719789a31f667839ae547a6503ace78513))
 * another quick fix for release ([02d0c18](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/02d0c189c87855b6b6185a279af471406a93861c))
 
-## [Unreleased]
-
-
-
 ---
-## [0.3.0] - 2026-07-24
+## [0.3.0]() - 2026-07-24
 
 ### Added
 - Dockerfile and docker-compose configuration for the frontend.
