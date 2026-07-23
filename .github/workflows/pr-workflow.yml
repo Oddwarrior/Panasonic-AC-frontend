@@ -48,3 +48,5 @@ jobs:
           tags: |
             oddwarrior/panasonic-ac-frontend:latest
             oddwarrior/panasonic-ac-frontend:${{ github.sha }}
+
+            
