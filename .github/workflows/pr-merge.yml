@@ -24,20 +24,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
-      - name: Prepare Docker Tags
-        id: prep
-        run: |
-          # Base tags for all PR merges
-          TAGS="oddwarrior/panasonic-ac-frontend:${{ github.sha }},oddwarrior/panasonic-ac-frontend:pr-${{ github.event.pull_request.number }}"
-          
-          # If this was a Release Please PR, add the production release tags
-          if [[ "${{ github.event.pull_request.head.ref }}" == release-please--* ]]; then
-            VERSION=$(node -p "require('./package.json').version")
-            echo "Release Please PR detected. Found version: $VERSION"
-            TAGS="$TAGS,oddwarrior/panasonic-ac-frontend:$VERSION,oddwarrior/panasonic-ac-frontend:latest"
-          fi
-          
-          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+      - name: Extract Release Version
+        id: pkg
+        if: startsWith(github.event.pull_request.head.ref, 'release-please--')
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: oddwarrior/panasonic-ac-frontend
+          tags: |
+            type=raw,value=${{ github.sha }}
+            type=ref,event=pr
+            ${{ steps.pkg.outputs.version != '' && format('type=raw,value={0}', steps.pkg.outputs.version) || '' }}
+            ${{ steps.pkg.outputs.version != '' && 'type=raw,value=latest' || '' }}
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
@@ -45,6 +46,7 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ${{ steps.prep.outputs.tags }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache
+          cache-to: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache,mode=max
