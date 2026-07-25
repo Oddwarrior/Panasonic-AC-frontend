@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v1.0.0...v1.1.0) (2026-07-25)
+
+
+### Features
+
+* add non-blocking Trivy vulnerability scanning to pr-verify workflow ([a0b8038](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/a0b8038a33f8f8d5c1fdde2f37c9fd632c14d7b7))
+* migrate docker build and push operations to GitHub Container Registry ([e1ded3a](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/e1ded3a9767bd3a54bfc0b64312328bdf37c1d29))
+
+
+### Bug Fixes
+
+* update Trivy scanning target to Docker image and standardize SHA tagging in CI workflows ([8875ba6](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/8875ba6e23fcebe05db40f1b139cb554e8ec1a56))
+
 ## [1.0.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v0.6.0...v1.0.0) (2026-07-25)
 
 
