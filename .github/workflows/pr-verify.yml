@@ -4,6 +4,10 @@ name: Verify Build on PR
   pull_request:
     types: [opened, synchronize, reopened]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   verify-build:
     runs-on: ubuntu-latest
@@ -18,11 +22,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         
-      - name: Login to Docker Hub
+      - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build Docker Image
         uses: docker/build-push-action@v5
@@ -32,8 +37,8 @@ jobs:
           load: true
           platforms: linux/amd64
           tags: oddwarrior/panasonic-ac-frontend:test
-          cache-from: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache
-          cache-to: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/oddwarrior/panasonic-ac-frontend:buildcache
+          cache-to: type=registry,ref=ghcr.io/oddwarrior/panasonic-ac-frontend:buildcache,mode=max
 
       - name: Run Trivy Vulnerability Scanner on Docker Image (Non-Blocking)
         uses: aquasecurity/trivy-action@master
