@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v0.6.0...v1.0.0) (2026-07-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* The API endpoints have been completely restructured and require a new authentication token format.
+
+### Features
+
+* completely overhaul the backend API ([12c7a9e](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/12c7a9ef40e793bfa3a247ea24e4b8734b2ad001))
+* enable GHA caching for Docker builds in PR workflows ([3f206d8](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/3f206d8d2254fac403ffa39ce3d1554b6a8c3319))
+
+
+### Bug Fixes
+
+* remove v prefix from image tag in pr-merge workflow ([046dd29](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/046dd2927796412df036d4f7e1e013d32a40ae28))
+* remove v prefix from image tag in pr-merge workflow ([f125b62](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/f125b629040bd4a146772430dcc294b46b0ef06f))
+
 ## [0.6.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v0.5.0...v0.6.0) (2026-07-23)
 
 
