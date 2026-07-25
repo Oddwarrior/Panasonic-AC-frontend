@@ -36,7 +36,28 @@ jobs:
         with:
           context: .
           push: false
-          platforms: linux/amd64,linux/arm64
+          load: true
+          platforms: linux/amd64
           tags: oddwarrior/panasonic-ac-frontend:test
           cache-from: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache
           cache-to: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache,mode=max
+
+      - name: Test Docker Image
+        run: |
+          # Start the container in the background on port 8080
+          docker run -d -p 8080:80 --name app-test oddwarrior/panasonic-ac-frontend:test
+          
+          # Give Nginx a few seconds to boot
+          sleep 5
+          
+          # Ping the server to verify it returns a 200 OK status
+          if curl -s -f -o /dev/null http://localhost:8080; then
+            echo "✅ Container is running and serving content successfully!"
+          else
+            echo "❌ Container failed to serve content!"
+            docker logs app-test
+            exit 1
+          fi
+          
+          # Clean up
+          docker rm -f app-test
