@@ -11,14 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: Run Trivy Vulnerability Scanner (Non-Blocking)
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          format: 'table'
-          exit-code: '0'
-          severity: 'CRITICAL,HIGH'
-        
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         
@@ -41,6 +34,14 @@ jobs:
           tags: oddwarrior/panasonic-ac-frontend:test
           cache-from: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache
           cache-to: type=registry,ref=oddwarrior/panasonic-ac-frontend:buildcache,mode=max
+
+      - name: Run Trivy Vulnerability Scanner on Docker Image (Non-Blocking)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'oddwarrior/panasonic-ac-frontend:test'
+          format: 'table'
+          exit-code: '0'
+          severity: 'CRITICAL,HIGH'
 
       - name: Test Docker Image
         run: |
