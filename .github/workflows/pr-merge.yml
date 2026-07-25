@@ -71,9 +71,16 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            const version = "${{ steps.pkg.outputs.version }}";
+            let tags = `${{ steps.meta.outputs.tags }}`;
+            
+            if (version !== "") {
+              tags += `\noddwarrior/panasonic-ac-frontend:${version}\noddwarrior/panasonic-ac-frontend:latest`;
+            }
+            
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '🚀 **Docker Image Published!**\n\nThe following tags have been built and pushed:\n```text\n${{ steps.meta.outputs.tags }}\n${{ steps.pkg.outputs.version != '' && format(''oddwarrior/panasonic-ac-frontend:{0}\noddwarrior/panasonic-ac-frontend:latest'', steps.pkg.outputs.version) || '' }}\n```'
+              body: `🚀 **Docker Image Published!**\n\nThe following tags have been built and pushed:\n\`\`\`text\n${tags}\n\`\`\``
             })
