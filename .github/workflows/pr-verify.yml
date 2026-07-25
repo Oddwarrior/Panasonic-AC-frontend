@@ -11,6 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
+      - name: Run Trivy Vulnerability Scanner (Non-Blocking)
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          format: 'table'
+          exit-code: '0'
+          severity: 'CRITICAL,HIGH'
+        
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
         
