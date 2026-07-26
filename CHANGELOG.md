@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v1.1.0...v1.2.0) (2026-07-26)
+
+
+### Features
+
+* add PR comment step to verify-build workflow with commit SHA identification ([5c90384](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/5c90384004b3186094e962f1276ced348190acaf))
+
+
+### Bug Fixes
+
+* add .dockerignore to exclude build artifacts and sensitive files ([cc80d9a](https://github.com/Oddwarrior/Panasonic-AC-frontend/commit/cc80d9a0fa86ced6028a4886400a70d479aadc9d))
+
 ## [1.1.0](https://github.com/Oddwarrior/Panasonic-AC-frontend/compare/v1.0.0...v1.1.0) (2026-07-25)
 
 
